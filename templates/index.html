@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Price Prediction</title>
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Link to your custom style.css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h1 class="mb-4">Car Price Prediction</h1>
+    <form action="{{ url_for('predict') }}" method="post" class="mb-4">
+      <div class="form-group">
+        <label for="Make">Make:</label>
+        <select name="Make" class="form-control" required>
+          <option value="Honda">Honda</option>
+          <option value="Maruit">Maruit</option>
+          <option value="Hyundai">Hyundai</option>
+          <option value="Toyota">Toyota</option>
+          <option value="BMW">BMW</option>
+          <option value="Skoda">Skoda</option>
+          <option value="Nissan">Nissan</option>
+          <option value="Renault">Renault</option>
+          <option value="Tata">Tata</option>
+          <option value="Volkswagen">Volkswagen</option>
+          <option value="Ford">Ford</option>
+          <option value="Mercedes">Mercedes</option>-Benz
+          <option value="Audi">Audi</option>
+          <option value="Mahindra">Mahindra</option>
+          <option value="MG">MG</option>
+          <option value="Jeep">Jeep</option>
+          <option value="Porsche">Porsche</option>
+          <option value="Kia">Kia</option>
+          <option value="Land">Land</option> Rover
+          <option value="Volvo">Volvo</option>
+          <option value="Maserati">Maserati</option>
+          <option value="Jaguar">Jaguar</option>
+          <option value="Isuzu">Isuzu</option>
+          <option value="Ferrari">Ferrari</option>
+          <option value="Mitsubishi">Mitsubishi</option>
+          <option value="Datsun">Datsun</option>
+          <option value="MINI">MINI</option>
+          <option value="Chevrolet">Chevrolet</option>
+          <option value="Ssangyong">Ssangyong</option>
+          <option value="Fiat">Fiat</option>
+          <option value="Rolls">Rolls</option>-Royce
+          <option value="Lexus">Lexus</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="Owner">Owner Type:</label>
+        <select class="form-control" id="Owner" name="Owner" required>
+          <option value="First">First</option>
+          <option value="Second">Second</option>
+          <option value="Third">Third</option>
+          <option value="UnRegistered Car">UnRegistered Car</option>
+          <option value="4 or More">4 or More</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="Year">Year:</label>
+        <input type="number" class="form-control" id="Year" name="Year" required />
+      </div>
+
+      <div class="form-group">
+        <label for="Kilometer">Kilometer:</label>
+        <input type="number" class="form-control" id="Kilometer" name="Kilometer" required />
+      </div>
+
+      <div class="form-group">
+        <label for="FuelType">Fuel Type:</label>
+        <select class="form-control" id="FuelType" name="FuelType" required>
+          <option value="Petrol">Petrol</option>
+          <option value="Diesel">Diesel</option>
+          <option value="CNG">CNG</option>
+          <option value="LPG">LPG</option>
+          <option value="Electric">Electric</option>
+          <option value="CNG + CNG">CNG + CNG</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="Petrol + CNG">Petrol + CNG</option>
+          <option value="Petrol + LPG">Petrol + LPG</option>
+        </select>
+      </div>
+
+      <!-- <div class="form-group">
+          <label for="EngineCC">Engine_cc:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="EngineCC"
+            name="EngineCC"
+            required
+          />
+        </div> -->
+
+      <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+
+    {% if error_msg %}
+    <h2>{{error_msg}}</h2>
+    {% endif %}
+    {% if prediction_text and error_msg==None %}
+    <h2>Prediction Result: Rs.{{ prediction_text }}</h2>
+    {% endif %}
+  </div>
+
+  <!-- Add Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
