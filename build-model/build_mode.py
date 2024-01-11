@@ -1,9 +1,11 @@
+
 import pandas as pd
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
 import joblib
 
-df = pd.read_csv("carprice_og.csv")
+df = pd.read_csv("car_price/build-model/carprice_og.csv")
 
 df.isnull().sum()
 df.dropna(inplace=True)
@@ -60,12 +62,22 @@ for col in cols:
 # Example: Handling missing values
 df.fillna(df.mean(), inplace=True)
 
-# Example: Train a linear regression model
-X = df[["Make", "Owner", "Year", "Kilometer", "Fuel Type"]]
-y = df["Price"]
+col_names = df.columns
+features = df[col_names]
+scaler = StandardScaler().fit(features.values)
+features = scaler.transform(features.values)
+scaled_df = pd.DataFrame(features, columns = col_names)
+scaled_df.head()
 
-model = LinearRegression()
+# Example: Train a linear regression model
+X = scaled_df[["Make", "Owner", "Year", "Kilometer", "Fuel Type"]]
+y = scaled_df["Price"]
+model = RandomForestRegressor()
 model.fit(X, y)
+
+
+
+
 
 
 # save the model using joblib

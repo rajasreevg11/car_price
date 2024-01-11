@@ -5,7 +5,8 @@ import joblib
 app = Flask(__name__)
 
 # Load the pre-trained model
-car_price_model = joblib.load("./build-model/lr_model.joblib")
+car_price_model = joblib.load("C:\\Users\\ADMIN\\Desktop\\python\\ROHIT\\car_price\\build-model\\lr_model.joblib")
+
 
 # Encoding dictionaries
 fuel_type_stoi = {
@@ -68,7 +69,7 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["GET","POST"])
 def predict():
     if request.method == "POST":
         # Get input data from the request form
